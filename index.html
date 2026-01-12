@@ -1,70 +1,81 @@
 <!doctype html>
-<html lang="et">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MEREGRUPP · Vabasukeldumine</title>
-  <meta name="description" content="Vabasukeldumise (freedive) kursused ja treeningud Eestis. Tase 1 (kuni 5 m) ja Tase 2 (kuni 14 m), hingamistehnikad, kõrvade tasakaalustamine, päästetehnikad. Treeningud avavees aastaringi. Võta ühendust: meregrupp☉gmail.com (vaheta 'ätt' märk!), 5105573." />
+  <title>MEREGRUPP · Freediving</title>
+  <meta name="description" content="Freediving courses and training in Estonia. Level 1 (up to 5 m) and Level 2 (up to 14 m), breathing techniques, equalization, rescue skills. Open‑water training year‑round. Contact: meregrupp☉gmail.com (replace the at symbol), +372 510 5573." />
   <link rel="icon" href="media/favicon.svg">
   <style>
     :root{
-      --bg:#070d1a;
-      --ink:#e6f3ff;
-      --muted:#a9bfd6;
-      --primary:#37e0ff;
-      --accent:#4ad7b8;
-      --card:#0b1730cc;
-      --stroke:#20355566;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --nav-h:64px; /* kasut. ankrute nihkeks ja mobiilimenüüks */
+      /* Slightly lighter, airy palette */
+      --bg:#0b1730;         /* navy (lighter than before) */
+      --ink:#f2f7ff;        /* main text */
+      --muted:#b7c8db;      /* secondary text */
+      --primary:#52e5ff;    /* cyan accent */
+      --accent:#86ead6;     /* mint accent */
+      --card:#122549cc;     /* glass card */
+      --stroke:#32527a66;   /* soft border */
+      --shadow:0 12px 36px rgba(0,0,0,.35);
+      --nav-h:64px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--ink); background: radial-gradient(1200px 700px at 10% -10%, #0f1f3b 0%, transparent 60%),
-                         radial-gradient(900px 600px at 110% 10%, #0a1a32 0%, transparent 60%),
-                         linear-gradient(#081228, var(--bg));
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, #102448 0%, transparent 60%),
+        radial-gradient(900px 600px at 110% 10%, #0e213f 0%, transparent 60%),
+        linear-gradient(#0a1937, var(--bg));
       line-height:1.6;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color:transparent;
     }
     a{color:var(--primary); text-decoration:none}
     a:hover{text-decoration:underline}
     :focus-visible{outline:2px solid var(--primary); outline-offset:2px}
 
-    /* nav */
+    /* Bubble canvas sits behind everything */
+    #bubbles{
+      position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.55;
+    }
+
+    /* NAV */
     .nav{
-      position:sticky; top:0; backdrop-filter:saturate(120%) blur(8px);
-      background:#060e1b99; border-bottom:1px solid var(--stroke); z-index:1000;
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter:saturate(120%) blur(8px);
+      background:#0a1530bf; border-bottom:1px solid var(--stroke);
     }
     .nav .wrap{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px; gap:12px}
     .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.6px; white-space:nowrap}
     .brand img{width:30px; height:30px}
-    .menu{display:flex; gap:22px; flex-wrap:wrap; align-items:center}
+    .menu{display:flex; gap:22px; align-items:center; z-index:1001}
     .menu a{color:var(--ink); opacity:.9; white-space:nowrap}
-
-    /* mobiilinupp */
     .menu-toggle{
-      display:none; border:1px solid var(--stroke); background:#0e1a34; color:var(--ink);
+      display:none; border:1px solid var(--stroke); background:#132a55; color:var(--ink);
       padding:10px 12px; border-radius:12px; font-weight:700; line-height:1; cursor:pointer;
     }
 
-    /* hero */
+    /* HERO */
     .hero{position:relative; isolation:isolate;}
-    .hero .wrap{max-width:1100px; margin:0 auto; padding:80px 20px 60px}
+    .hero .wrap{max-width:1100px; margin:0 auto; padding:88px 20px 64px}
     .hero .bg{position:absolute; inset:0; z-index:-1; overflow:hidden;}
-    .hero .bg img{width:100%; height:100%; object-fit:cover; opacity:.35; filter:contrast(110%) saturate(115%)}
-    .hero .bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, #030712cc, #070d1a 80%)}
-    h1{font-size:clamp(32px, 4vw, 56px); line-height:1.08; margin:0 0 14px; letter-spacing:.4px}
-    .lead{font-size:clamp(16px, 1.4vw, 19px); color:var(--muted); max-width:700px}
+    .hero .bg img{width:100%; height:100%; object-fit:cover; opacity:.3; filter:contrast(110%) saturate(115%)}
+    .hero .bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, #081635cc, var(--bg) 80%)}
+    h1{font-size:clamp(34px, 4vw, 60px); line-height:1.08; margin:0 0 14px; letter-spacing:.4px}
+    .lead{font-size:clamp(16px, 1.4vw, 20px); color:var(--muted); max-width:720px}
     .cta{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; border:1px solid var(--stroke); background:#0e1a34; color:var(--ink); box-shadow:var(--shadow)}
-    .btn.primary{background:linear-gradient(135deg, var(--primary), #0ad2ff 40%, #008cff 110%); color:#00131a; border:none}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; border:1px solid var(--stroke); background:#132a55; color:var(--ink); box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg, var(--primary), #0fd7ff 40%, #0aa0ff 110%); color:#00131a; border:none}
     .btn:hover{transform:translateY(-1px)}
 
-    /* sections */
+    /* Decorative marine silhouettes */
+    .ornaments{position:absolute; bottom:-8px; left:0; right:0; display:flex; justify-content:center; gap:32px; opacity:.15}
+    .ornaments svg{height:42px}
+
+    /* Sections */
     section, header{scroll-margin-top:calc(var(--nav-h) + 8px)}
-    section{padding:70px 20px}
+    section{padding:72px 20px}
     .container{max-width:1100px; margin:0 auto}
     h2{font-size:clamp(24px, 2.6vw, 36px); margin:0 0 24px}
     .muted{color:var(--muted)}
@@ -79,47 +90,254 @@
     .list{margin:14px 0 0; padding-left:18px}
     .list li{margin:6px 0}
 
-    /* method + safety */
-    .badge{display:inline-flex; padding:6px 10px; font-size:12px; letter-spacing:.6px; border:1px solid var(--stroke); border-radius:999px; background:#071127}
+    .badge{display:inline-flex; padding:6px 10px; font-size:12px; letter-spacing:.6px; border:1px solid var(--stroke); border-radius:999px; background:#0b1f45}
 
-    /* kids table */
+    /* Kids table */
     .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:12px}
     table{width:100%; border-collapse:collapse; border:1px solid var(--stroke); border-radius:12px; overflow:hidden; min-width:520px}
     th,td{padding:10px 12px; border-bottom:1px solid var(--stroke)}
-    thead th{background:#081637; text-align:left}
-    /* Väga kitsal ekraanil muudame read kaartideks */
+    thead th{background:#0c214a; text-align:left}
     @media (max-width:520px){
       table.kids-table{display:block; border:0; min-width:0}
       table.kids-table thead{display:none}
       table.kids-table tbody{display:grid; gap:12px}
-      table.kids-table tr{display:grid; grid-template-columns:1fr; background:#08163766; border:1px solid var(--stroke); border-radius:12px; padding:8px 12px}
+      table.kids-table tr{display:grid; grid-template-columns:1fr; background:#0c214a66; border:1px solid var(--stroke); border-radius:12px; padding:8px 12px}
       table.kids-table td{display:flex; justify-content:space-between; gap:12px; border-bottom:0; padding:8px 0}
       table.kids-table td::before{content:attr(data-label); color:var(--muted); font-weight:600}
     }
 
-    /* social */
+    /* Social */
     .social{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
     .icon{width:18px; height:18px; display:inline-block}
 
-    /* footer */
-    footer{padding:40px 20px 60px; border-top:1px solid var(--stroke); background:#060d1f}
+    /* Footer */
+    footer{padding:40px 20px 60px; border-top:1px solid var(--stroke); background:#091a34}
     .footer-wrap{max-width:1100px; margin:0 auto; display:grid; gap:14px}
     .small{font-size:14px; color:var(--muted)}
 
-    /* mobiilipaigutus menüüle */
+    /* Mobile menu layout */
     @media (max-width:839px){
       .menu-toggle{display:inline-flex}
       .menu{
         position:fixed; left:0; right:0; top:calc(var(--nav-h) + env(safe-area-inset-top));
-        background:#060e1fee; border-bottom:1px solid var(--stroke);
+        background:#0b1633f2; border-bottom:1px solid var(--stroke);
         padding:12px 20px 16px; display:none; flex-direction:column; gap:10px;
       }
       .menu.open{display:flex}
       .brand span{font-size:16px}
     }
   </style>
+</head>
+<body>
+  <!-- Animated bubble canvas -->
+  <canvas id="bubbles" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <img src="media/favicon.svg" alt="MEREGRUPP wave icon" />
+        <span>MEREGRUPP</span>
+      </a>
+      <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰ Menu</button>
+      <div class="menu" id="site-menu" role="menubar">
+        <a role="menuitem" href="#courses">Courses</a>
+        <a role="menuitem" href="#method">Method</a>
+        <a role="menuitem" href="#training">Training</a>
+        <a role="menuitem" href="#youth">Youth</a>
+        <a role="menuitem" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="hero" aria-label="Intro">
+    <div class="bg" aria-hidden="true">
+      <img src="media/hero.jpg" alt="" />
+    </div>
+    <div class="wrap">
+      <h1>Freediving in Estonia</h1>
+      <p class="lead">We learn breathing and focus, gear fundamentals, safe equalization, and rescue skills. We train in open water year‑round — even in winter.</p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">Join the group</a>
+        <a class="btn" href="#courses">See courses</a>
+      </div>
+    </div>
+
+    <!-- Subtle marine ornaments (decorative only) -->
+    <div class="ornaments" aria-hidden="true">
+      <!-- Whale tail -->
+      <svg viewBox="0 0 128 64" fill="currentColor">
+        <path d="M64 48c-8-10-22-16-40-16-8 0-16 2-24 4 10-18 29-24 44-20 7 2 14 6 20 12 6-6 13-10 20-12 15-4 34 2 44 20-8-2-16-4-24-4-18 0-32 6-40 16z"/>
+      </svg>
+      <!-- Dolphin -->
+      <svg viewBox="0 0 128 64" fill="currentColor">
+        <path d="M6 34c18-14 40-20 62-14 10 3 19 9 26 17 5 6 9 11 15 11-7 5-16 5-25-2-6-5-11-7-19-7-13 0-27 6-38 6-9 0-16-4-21-11zM18 20l8 3-6 3z"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <div class="container">
+      <h2>Courses</h2>
+      <p class="muted">We follow methods from leading freedivers worldwide. Training is practical and safety‑first.</p>
+      <div class="grid cols-2">
+        <article class="card">
+          <img src="media/course1.jpg" alt="Course Level 1 illustration" loading="lazy" />
+          <div class="pad">
+            <h3>Level 1 · Foundations</h3>
+            <p class="muted">Dives up to <strong>5 m</strong>. Core theory and equipment, relaxing and recovery breathing, focus, equalization, and basic rescue.</p>
+            <p class="price">€180 · all included</p>
+            <ul class="list">
+              <li>Prerequisites: age 18+ (16–18 with guardian consent)</li>
+              <li>Swimming ability: <strong>100 m</strong> continuous without rest</li>
+            </ul>
+            <p class="muted">Schedule is coordinated with participants.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="media/course2.jpg" alt="Course Level 2 illustration" loading="lazy" />
+          <div class="pad">
+            <h3>Level 2 · Intermediate</h3>
+            <p class="muted">Dives up to <strong>14 m</strong>. Builds on Level 1: safer deepening techniques and rescue.</p>
+            <ul class="list">
+              <li>Requires Level 1 or equivalent</li>
+              <li>Focus: technique, relaxation, disciplines</li>
+            </ul>
+            <p class="muted">Time and location by agreement.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section id="method">
+    <div class="container">
+      <span class="badge">METHOD</span>
+      <h2>Attention Deconcentration & Breathing</h2>
+      <div class="grid cols-2">
+        <div class="card"><img src="media/method.jpg" alt="Breathing and focus" loading="lazy"></div>
+        <div>
+          <p>We practice relaxing breathing and <em>attention deconcentration</em> to support focus, self‑control, and safety.</p>
+          <ul class="list">
+            <li>Theory + dry training</li>
+            <li>Breathing and recovery routines</li>
+            <li>Buddy safety and signals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training">
+    <div class="container">
+      <h2>Open‑Water Training Year‑Round</h2>
+      <div class="grid cols-2">
+        <div>
+          <p>MEREGRUPP runs open‑water sessions in Estonia <strong>throughout the year (including winter)</strong>. Load and disciplines depend on your level and conditions.</p>
+          <p>Outdoor sessions follow weather and ice conditions; pool when needed. One‑to‑one training is available.</p>
+        </div>
+        <div class="card"><img src="media/openwater.jpg" alt="Open‑water training" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTH -->
+  <section id="youth">
+    <div class="container">
+      <h2>AIDA Recommended Limits for Under‑16s</h2>
+      <div class="grid cols-2">
+        <div class="card"><img src="media/kids.jpg" alt="Youth safety" loading="lazy"></div>
+        <div class="table-wrap">
+          <table class="kids-table" aria-label="AIDA recommended maxima for under 16">
+            <thead>
+              <tr><th>Age</th><th>Depth (m)</th><th>Time</th><th>Distance</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Age">6–8</td>
+                <td data-label="Depth (m)">age / 4</td>
+                <td data-label="Time"></td>
+                <td data-label="Distance"></td>
+              </tr>
+              <tr>
+                <td data-label="Age">8–10</td>
+                <td data-label="Depth (m)">age / 2</td>
+                <td data-label="Time">30″</td>
+                <td data-label="Distance">20 m</td>
+              </tr>
+              <tr>
+                <td data-label="Age">10–14</td>
+                <td data-label="Depth (m)">age / 2 + 2</td>
+                <td data-label="Time">1′ (11–13)</td>
+                <td data-label="Distance">30 m (11–13)</td>
+              </tr>
+              <tr>
+                <td data-label="Age">14–16</td>
+                <td data-label="Depth (m)">age</td>
+                <td data-label="Time">2′ (14–15)</td>
+                <td data-label="Distance">40 m (14–15)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="small muted">Source: AIDA recommended max apnea efforts under 16.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <a href="https://eos.aidainternational.org/print_certificate/51738"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="AIDA instructor certificate (opens in a new tab)">
+            <img src="media/instructor.jpg" alt="Instructor: click to view AIDA certificate" loading="lazy">
+          </a>
+        </div>
+        <div>
+          <p>Training is coordinated by a coach with EOC underwater sports license and AIDA4 Master‑Freediver certification in Estonia.</p>
+          <p>(Click the image to view the AIDA instructor certificate.)</p>
+          <p class="muted">Course dates are arranged with participants.</p>
+          <p><strong>Email:</strong> <a href="mailto:meregrupp☉gmail.com">meregrupp☉gmail.com</a><br/>
+             <strong>Phone:</strong> <a href="tel:+3725105573">+372 510 5573</a></p>
+
+          <p><strong>Facebook:</strong>
+            <a href="https://www.facebook.com/meregrupp/" target="_blank" rel="noopener">facebook.com/meregrupp</a>
+          </p>
+          <div class="social">
+            <a class="btn" href="https://www.facebook.com/meregrupp/" target="_blank" rel="noopener" aria-label="Open MEREGRUPP on Facebook">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M22 12.06C22 6.55 17.52 2 12.06 2 6.55 2 2 6.55 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.86c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.45 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
+            <a class="btn primary" href="mailto:meregrupp☉gmail.com?subject=Freediving%20course">Write</a>
+            <a class="btn" href="#courses">See courses</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-wrap">
+      <div class="small">© <span id="y"></span> MEREGRUPP. All rights reserved.</div>
+    </div>
+  </footer>
+
   <script>
-    // Sujuv kerimine (arvestab ka reduce-motion eelistust)
+    // Dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth in‑page scrolling (respects reduced motion)
     const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     addEventListener('click', e=>{
       const a = e.target.closest('a[href^="#"]');
@@ -130,222 +348,85 @@
       target.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth'});
     });
 
-    // Mobiilimenüü lüliti
-    addEventListener('DOMContentLoaded', ()=>{
+    // Mobile menu toggle
+    (function(){
       const btn = document.querySelector('.menu-toggle');
       const menu = document.getElementById('site-menu');
       if(!btn || !menu) return;
-
       const closeMenu = ()=>{ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); };
       const openMenu  = ()=>{ menu.classList.add('open');  btn.setAttribute('aria-expanded','true'); };
-
-      btn.addEventListener('click', ()=>{
-        (menu.classList.contains('open') ? closeMenu : openMenu)();
-      });
-      // sulge klõpsul väljapoole või menüülingile
-      document.addEventListener('click', (e)=>{
-        if(menu.contains(e.target) || e.target === btn) return;
-        closeMenu();
-      });
-      menu.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', closeMenu);
-      });
-      // Esc
+      btn.addEventListener('click', ()=> (menu.classList.contains('open') ? closeMenu : openMenu)() );
+      document.addEventListener('click', (e)=>{ if(menu.contains(e.target) || e.target === btn) return; closeMenu(); });
+      menu.querySelectorAll('a[href^="#"]').forEach(a=> a.addEventListener('click', closeMenu));
       addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
-    });
+    })();
+
+    // Animated bubbles (Canvas). Light, efficient, pauses when hidden, and honors reduced motion.
+    (function(){
+      const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+      const canvas = document.getElementById('bubbles');
+      if(!canvas || reduced) { if(canvas) canvas.style.display='none'; return; }
+
+      const ctx = canvas.getContext('2d');
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let W = 0, H = 0, bubbles = [], running = true;
+
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+      function resize(){
+        W = canvas.width  = Math.floor(innerWidth * dpr);
+        H = canvas.height = Math.floor(innerHeight * dpr);
+        canvas.style.width  = innerWidth + 'px';
+        canvas.style.height = innerHeight + 'px';
+        // Rebuild bubble field based on area
+        const target = Math.min(Math.floor((innerWidth*innerHeight)/14000), 140);
+        bubbles.length = 0;
+        for(let i=0;i<target;i++){
+          bubbles.push({
+            x: rand(0, W), y: rand(H*0.2, H), r: rand(2*dpr, 10*dpr),
+            vy: rand(-0.25*dpr, -0.75*dpr), vx: rand(-0.05*dpr, 0.05*dpr),
+            wobble: rand(0.5, 2), alpha: rand(0.15, 0.5)
+          });
+        }
+      }
+      function draw(){
+        if(!running) return;
+        ctx.clearRect(0,0,W,H);
+        // soft gradient tint
+        const g = ctx.createLinearGradient(0,H,0,0);
+        g.addColorStop(0,'rgba(255,255,255,0.02)');
+        g.addColorStop(1,'rgba(255,255,255,0.08)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,W,H);
+
+        for(const b of bubbles){
+          // movement
+          b.x += b.vx + Math.sin((b.y/40))*b.wobble*0.15;
+          b.y += b.vy;
+          // recycle at bottom/top
+          if(b.y < -20*dpr || b.x < -20*dpr || b.x > W + 20*dpr){
+            b.x = rand(0, W);
+            b.y = H + rand(10*dpr, 80*dpr);
+          }
+          // bubble
+          ctx.globalAlpha = b.alpha;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+          ctx.fillStyle = '#bfe8ff';
+          ctx.fill();
+          // highlight
+          ctx.globalAlpha = b.alpha*0.7;
+          ctx.beginPath();
+          ctx.arc(b.x - b.r*0.35, b.y - b.r*0.35, b.r*0.35, 0, Math.PI*2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+        requestAnimationFrame(draw);
+      }
+      addEventListener('resize', resize, {passive:true});
+      document.addEventListener('visibilitychange', ()=>{ running = !document.hidden; if(running) requestAnimationFrame(draw); });
+      resize(); requestAnimationFrame(draw);
+    })();
   </script>
-</head>
-<body>
-  <!-- NAV -->
-  <nav class="nav" aria-label="Põhimenüü">
-    <div class="wrap">
-      <a class="brand" href="#top">
-        <img src="media/favicon.svg" alt="MEREGRUPP laine ikoon" />
-        <span>MEREGRUPP</span>
-      </a>
-      <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Ava menüü">☰ Menüü</button>
-      <div class="menu" id="site-menu" role="menubar">
-        <a role="menuitem" href="#kursused">Kursused</a>
-        <a role="menuitem" href="#metoodika">Metoodika</a>
-        <a role="menuitem" href="#treeningud">Treeningud</a>
-        <a role="menuitem" href="#lapsed">Lapsed</a>
-        <a role="menuitem" href="#kontakt">Kontakt</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="top" class="hero" aria-label="Kodulehe sissejuhatus">
-    <div class="bg" aria-hidden="true">
-      <img src="media/hero.jpg" alt="" />
-    </div>
-    <div class="wrap">
-      <h1>Vabasukeldumine Eestis</h1>
-      <p class="lead">Õpime hingamist ja keskendumist, varustuse tundmist, kõrvade tasakaalustamist ning turvalist sukeldumist. Treenime avavees aastaringi – ka talvel.</p>
-      <div class="cta">
-        <a class="btn primary" href="#kontakt">Liitu grupiga</a>
-        <a class="btn" href="#kursused">Vaata kursuseid</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- KURSED -->
-  <section id="kursused">
-    <div class="container">
-      <h2>Kursused</h2>
-      <p class="muted">Juhindume maailma juhtivate vabasukeldujate õpetustest. Väljaõpe on praktiline ja turvaline.</p>
-      <div class="grid cols-2">
-        <article class="card">
-          <img src="media/course1.jpg" alt="Kursuse Tase 1 illustratsioon" loading="lazy" />
-          <div class="pad">
-            <h3>Tase 1 · baaskursus</h3>
-            <p class="muted">Sukeldume kuni <strong>5 m</strong>. Läbime teooria ja varustuse põhialused, õpime lõdvestavat ja taastavat hingamist, keskendumist, kõrvade tasakaalustamist ning päästetehnikaid.</p>
-            <p class="price">180 € · kõik hinnas</p>
-            <ul class="list">
-              <li>Eeldused: vanus 18+ (16–18 a vanema nõusolekul)</li>
-              <li>Ujumisoskus: <strong>100 m</strong> järjest puhketa</li>
-            </ul>
-            <p class="muted">Tunniplaan lepitakse osalejatega jooksvalt kokku.</p>
-          </div>
-        </article>
-        <article class="card">
-          <img src="media/course2.jpg" alt="Kursuse Tase 2 illustratsioon" loading="lazy" />
-          <div class="pad">
-            <h3>Tase 2 · edasijõudnu</h3>
-            <p class="muted">Sukeldume kuni <strong>14 m</strong>. Arendame Tase 1 oskusi ja süvendame turvalisi sügavamale mineku tehnikaid ning päästmist.</p>
-            <ul class="list">
-              <li>Eeldab Tase 1 või samaväärset taset</li>
-              <li>Fookus: tehnika, lõdvestus, distsipliinid</li>
-            </ul>
-            <p class="muted">Ajakava ja koht kokkuleppel.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- METOODIKA -->
-  <section id="metoodika">
-    <div class="container">
-      <span class="badge">METOODIKA</span>
-      <h2>Tähelepanu dekontsentratsioon & hingamine</h2>
-      <div class="grid cols-2">
-        <div class="card"><img src="media/method.jpg" alt="Hingamise ja keskendumise illustratsioon" loading="lazy"></div>
-        <div>
-          <p>Õpime lõdvestavat hingamist ja tähelepanu <em>dekontsentratsiooni</em> metoodikat, mis toetab keskendumist, enesekontrolli ja turvalisust.</p>
-          <ul class="list">
-            <li>Teooria + kuivtreening</li>
-            <li>Hingamise ja taastumise rutiinid</li>
-            <li>Partneri turvamine ja märguanded</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRENNID -->
-  <section id="treeningud">
-    <div class="container">
-      <h2>Treeningud avavees aastaringi</h2>
-      <div class="grid cols-2">
-        <div>
-          <p>Meregrupp korraldab Eestis treeningpäevi vabas vees <strong>aastaringselt (ka talvel)</strong>. Koormused ja distsipliinid valitakse vastavalt tasemele ja oludele.</p>
-          <p>Välitreeningud toimuvad vastavalt ilma- ja jääoludele; vajadusel basseinis. Võimalik on ka individuaaltreening.</p>
-        </div>
-        <div class="card"><img src="media/openwater.jpg" alt="Avavee treening" loading="lazy"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LAPSED -->
-  <section id="lapsed">
-    <div class="container">
-      <h2>AIDA soovituslikud piirid alla 16-aastastele</h2>
-      <div class="grid cols-2">
-        <div class="card"><img src="media/kids.jpg" alt="Noorte turvalisus" loading="lazy"></div>
-        <div class="table-wrap">
-          <table class="kids-table" aria-label="AIDA soovituslikud maksimumid alla 16-aastastele">
-            <thead>
-              <tr><th>Vanus</th><th>Sügavus (m)</th><th>Aeg</th><th>Distants</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="Vanus">6–8 a</td>
-                <td data-label="Sügavus (m)">vanus / 4</td>
-                <td data-label="Aeg"></td>
-                <td data-label="Distants"></td>
-              </tr>
-              <tr>
-                <td data-label="Vanus">8–10 a</td>
-                <td data-label="Sügavus (m)">vanus / 2</td>
-                <td data-label="Aeg">30″</td>
-                <td data-label="Distants">20 m</td>
-              </tr>
-              <tr>
-                <td data-label="Vanus">10–14 a</td>
-                <td data-label="Sügavus (m)">vanus / 2 + 2</td>
-                <td data-label="Aeg">1′ (11–13 a)</td>
-                <td data-label="Distants">30 m (11–13 a)</td>
-              </tr>
-              <tr>
-                <td data-label="Vanus">14–16 a</td>
-                <td data-label="Sügavus (m)">vanus</td>
-                <td data-label="Aeg">2′ (14–15 a)</td>
-                <td data-label="Distants">40 m (14–15 a)</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="small muted">Allikas: AIDA soovituslikud max apnea sooritused alla 16-aastastele.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section id="kontakt">
-    <div class="container">
-      <h2>Võta ühendust</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <a href="https://eos.aidainternational.org/print_certificate/51738"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="AIDA treeneri tõend (avaneb uues aknas)">
-            <img src="media/instructor.jpg" alt="Treener: klõpsa, et vaadata AIDA tõendit" loading="lazy">
-          </a>
-        </div>
-        <div>
-          <p>Väljaõpet koordineerib EOK allveespordi treenerikutsega ja sertifitseeritud AIDA4 Master‑Freediver Eestis.</p>
-          <p>(klõpsa pildil, et vaadata AIDA tõendit)</p>
-          <p class="muted">Kursuste ajad lepitakse huvilistega jooksvalt kokku.</p>
-          <p><strong>E‑post:</strong> <a href="mailto:meregrupp☉gmail.com">meregrupp☉gmail.com</a><br/>
-             <strong>Telefon:</strong> <a href="tel:+3725105573">+372 510 5573</a></p>
-
-          <!-- Facebooki link (lisatud) -->
-          <p><strong>Facebook:</strong>
-            <a href="https://www.facebook.com/meregrupp/" target="_blank" rel="noopener">facebook.com/meregrupp</a>
-          </p>
-          <div class="social">
-            <a class="btn" href="https://www.facebook.com/meregrupp/" target="_blank" rel="noopener" aria-label="Ava Meregrupp Facebookis">
-              <!-- lihtne FB ikoon -->
-              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M22 12.06C22 6.55 17.52 2 12.06 2 6.55 2 2 6.55 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.86c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.45 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/>
-              </svg>
-              <span>Facebook</span>
-            </a>
-            <a class="btn primary" href="mailto:meregrupp☉gmail.com?subject=Vabasukeldumise%20kursus">Kirjuta</a>
-            <a class="btn" href="#kursused">Vaata kursuseid</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-wrap">
-      <div class="small">© <span id="y"></span> MEREGRUPP. Kõik õigused kaitstud.</div>
-    </div>
-  </footer>
-
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
 </html>
